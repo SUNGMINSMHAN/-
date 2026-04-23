@@ -269,6 +269,265 @@
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
   }
 
+  /* ── 프로젝트 보드 ── */
+
+  /* 상단 툴바: 새 프로젝트 버튼을 우측에 배치 */
+  .board-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
+  /* 기본 primary 버튼 (파란 배경) */
+  .primary-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #ffffff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .primary-btn:hover {
+    background-color: #2980b9;
+  }
+
+  /* 프로젝트 카드 그리드: 반응형, 최소 260px */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  /* 개별 프로젝트 카드 */
+  .project-card {
+    background-color: #ffffff;
+    border: 1px solid #e4e7eb;
+    border-left: 4px solid #3498db;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .project-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .project-card-client {
+    font-size: 13px;
+    color: #667085;
+    margin-bottom: 8px;
+  }
+
+  .project-card-period {
+    font-size: 12px;
+    color: #8a94a4;
+  }
+
+  /* 비어있을 때 안내 메시지 (그리드 전체 폭을 차지) */
+  .project-empty {
+    grid-column: 1 / -1;
+    padding: 40px;
+    text-align: center;
+    color: #8a94a4;
+    font-size: 14px;
+  }
+
+  /* ── 모달 공통 ── */
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+  }
+
+  /* hidden 속성이 붙으면 숨김 (display 덮어쓰기) */
+  .modal-overlay[hidden] {
+    display: none;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 440px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #edf0f3;
+  }
+
+  .modal-header h2 {
+    font-size: 17px;
+  }
+
+  .modal-close {
+    width: 28px;
+    height: 28px;
+    font-size: 22px;
+    line-height: 1;
+    color: #888;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  /* 폼 필드 공통 */
+  .form-field {
+    margin-bottom: 14px;
+  }
+
+  .form-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+  }
+
+  .form-field input[type="text"],
+  .form-field input[type="date"] {
+    width: 100%;
+    padding: 9px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    color: inherit;
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+  }
+
+  .form-field input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
+  }
+
+  .form-field input[type="color"] {
+    width: 60px;
+    height: 36px;
+    padding: 2px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    background: none;
+    cursor: pointer;
+  }
+
+  /* 2열로 나란히 배치 (시작일/종료일 등) */
+  .form-row {
+    display: flex;
+    gap: 12px;
+  }
+
+  .form-row .form-field {
+    flex: 1;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .modal-footer button {
+    padding: 9px 16px;
+    font-size: 13px;
+    font-family: inherit;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .modal-footer button[type="submit"] {
+    color: #ffffff;
+    background-color: #3498db;
+    border: 1px solid #3498db;
+  }
+
+  .modal-footer button[type="submit"]:hover {
+    background-color: #2980b9;
+  }
+
+  .modal-footer button[type="button"] {
+    color: #333;
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+  }
+
+  .modal-footer button[type="button"]:hover {
+    background-color: #f0f3f6;
+  }
+
+  /* 다크모드: 카드/모달/입력 */
+  body.dark .project-card {
+    background-color: #262a33;
+    border-color: #3d4451;
+  }
+
+  body.dark .project-card-client,
+  body.dark .project-card-period,
+  body.dark .project-empty {
+    color: #9aa4b2;
+  }
+
+  body.dark .modal {
+    background-color: #262a33;
+  }
+
+  body.dark .modal-header {
+    border-color: #3d4451;
+  }
+
+  body.dark .modal-close {
+    color: #aaa;
+  }
+
+  body.dark .form-field label {
+    color: #c0c6d0;
+  }
+
+  body.dark .form-field input[type="text"],
+  body.dark .form-field input[type="date"] {
+    background-color: #2a2f38;
+    border-color: #3d4451;
+    color: #e0e0e0;
+  }
+
+  body.dark .modal-footer button[type="button"] {
+    background-color: #2a2f38;
+    color: #e0e0e0;
+    border-color: #3d4451;
+  }
+
+  body.dark .modal-footer button[type="button"]:hover {
+    background-color: #353b46;
+  }
+
   /* 다크모드용 폼 요소 색상 */
   body.dark .scrum-date {
     color: #9aa4b2;
@@ -385,10 +644,54 @@
         <textarea id="scrum-blockers" class="scrum-field" placeholder="진행을 가로막는 이슈가 있다면 적어주세요"></textarea>
       </div>
     </div>
-    <div class="page" data-page="board"><h1>프로젝트 보드</h1></div>
+    <div class="page" data-page="board">
+      <h1>프로젝트 보드</h1>
+      <div class="board-toolbar">
+        <button type="button" class="primary-btn" id="btn-new-project">+ 새 프로젝트</button>
+      </div>
+      <div class="project-grid" id="project-grid"></div>
+    </div>
     <div class="page" data-page="monthly"><h1>월별 로깅</h1></div>
     <div class="page" data-page="period"><h1>기간별 블록</h1></div>
   </main>
+
+  <!-- 새 프로젝트 생성 모달 -->
+  <div class="modal-overlay" id="project-modal" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h2>새 프로젝트</h2>
+        <button type="button" class="modal-close" id="project-modal-close" aria-label="닫기">&times;</button>
+      </div>
+      <form class="modal-body" id="project-form">
+        <div class="form-field">
+          <label for="project-name">이름</label>
+          <input type="text" id="project-name" required>
+        </div>
+        <div class="form-field">
+          <label for="project-client">클라이언트</label>
+          <input type="text" id="project-client">
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="project-start">시작일</label>
+            <input type="date" id="project-start">
+          </div>
+          <div class="form-field">
+            <label for="project-end">종료일</label>
+            <input type="date" id="project-end">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="project-color">색상</label>
+          <input type="color" id="project-color" value="#3498db">
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="project-cancel">취소</button>
+          <button type="submit">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
 <script>
   // ─────────────────────────────────────────────────────────────
@@ -715,6 +1018,125 @@
 
   // 초기 상태: 오늘 날짜로 설정
   setSelectedDate(selectedDate);
+
+  // ─────────────────────────────────────────────────────────────
+  // 프로젝트 보드 뷰: 카드 그리드 + 생성 모달
+  // ─────────────────────────────────────────────────────────────
+
+  var projectGridEl     = document.getElementById('project-grid');
+  var projectModal      = document.getElementById('project-modal');
+  var projectForm       = document.getElementById('project-form');
+  var btnNewProject     = document.getElementById('btn-new-project');
+  var projectModalClose = document.getElementById('project-modal-close');
+  var projectCancelBtn  = document.getElementById('project-cancel');
+
+  // 모달 폼 입력 요소 캐싱
+  var projectField = {
+    name:   document.getElementById('project-name'),
+    client: document.getElementById('project-client'),
+    start:  document.getElementById('project-start'),
+    end:    document.getElementById('project-end'),
+    color:  document.getElementById('project-color')
+  };
+
+  // 시작/종료일 중 하나만 있어도 읽기 쉽게 포맷
+  function formatProjectPeriod(start, end) {
+    if (!start && !end) return '기간 미정';
+    return (start || '···') + ' ~ ' + (end || '···');
+  }
+
+  // 프로젝트 카드 그리드를 저장된 값으로부터 다시 그림
+  function renderProjects() {
+    var projects = getData('kr_projects');
+    projectGridEl.innerHTML = '';
+
+    if (!projects || projects.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'project-empty';
+      empty.textContent = '아직 프로젝트가 없습니다. "+ 새 프로젝트" 버튼으로 추가해보세요.';
+      projectGridEl.appendChild(empty);
+      return;
+    }
+
+    projects.forEach(function(p) {
+      var card = document.createElement('div');
+      card.className = 'project-card';
+      // 카드 좌측 세로 바에 프로젝트 색상 반영
+      card.style.borderLeftColor = p.color || '#3498db';
+
+      var title = document.createElement('div');
+      title.className = 'project-card-title';
+      title.textContent = p.name;
+      card.appendChild(title);
+
+      // 클라이언트는 비어있으면 라인 자체를 생략
+      if (p.client) {
+        var client = document.createElement('div');
+        client.className = 'project-card-client';
+        client.textContent = p.client;
+        card.appendChild(client);
+      }
+
+      var period = document.createElement('div');
+      period.className = 'project-card-period';
+      period.textContent = formatProjectPeriod(p.startDate, p.endDate);
+      card.appendChild(period);
+
+      // 카드 클릭: 상세 화면은 다음 단계에서 구현 예정, 지금은 임시 alert
+      card.addEventListener('click', function() {
+        alert('프로젝트: ' + p.name + '\n(상세 화면은 이후 단계에서 구현)');
+      });
+
+      projectGridEl.appendChild(card);
+    });
+  }
+
+  // 모달 열기: 폼 초기화 + 기본 색상 + 첫 필드 포커스
+  function openProjectModal() {
+    projectForm.reset();
+    projectField.color.value = '#3498db';
+    projectModal.hidden = false;
+    projectField.name.focus();
+  }
+
+  function closeProjectModal() {
+    projectModal.hidden = true;
+  }
+
+  btnNewProject.addEventListener('click', openProjectModal);
+  projectModalClose.addEventListener('click', closeProjectModal);
+  projectCancelBtn.addEventListener('click', closeProjectModal);
+
+  // 오버레이 바깥 영역 클릭 시 닫기 (모달 내부 클릭은 무시)
+  projectModal.addEventListener('click', function(e) {
+    if (e.target === projectModal) closeProjectModal();
+  });
+
+  // ESC 키로 모달 닫기
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !projectModal.hidden) closeProjectModal();
+  });
+
+  // 폼 제출: 새 프로젝트를 kr_projects에 append
+  projectForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var projects = getData('kr_projects');
+    projects.push({
+      id:        'p_' + Date.now(),
+      name:      projectField.name.value.trim(),
+      client:    projectField.client.value.trim(),
+      startDate: projectField.start.value,
+      endDate:   projectField.end.value,
+      color:     projectField.color.value,
+      createdAt: new Date().toISOString()
+    });
+    setData('kr_projects', projects);
+    closeProjectModal();
+    renderProjects();
+  });
+
+  // 초기 렌더
+  renderProjects();
 </script>
 </body>
 </html>
