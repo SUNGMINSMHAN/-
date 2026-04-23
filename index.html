@@ -58,36 +58,89 @@
     background-color: rgba(255, 255, 255, 0.08);
   }
 
+  /* 현재 선택된 메뉴 강조: 배경색을 밝은 파랑으로 변경 */
+  .menu li.active {
+    background-color: #3498db;
+    font-weight: 600;
+  }
+
   /* 우측 메인 영역: 남은 공간을 모두 차지 */
   .main {
     flex: 1;
     padding: 32px;
     min-height: 100vh;
   }
+
+  /* 각 페이지 패널: 기본은 숨김 */
+  .page {
+    display: none;
+  }
+
+  /* 활성화된 페이지만 표시 */
+  .page.active {
+    display: block;
+  }
 </style>
 </head>
 <body>
-  <!-- 좌측 사이드바: 네비게이션 메뉴 -->
+  <!-- 좌측 사이드바: 네비게이션 메뉴. data-target으로 연결될 페이지 지정 -->
   <aside class="sidebar">
     <div class="sidebar-title">업무 관리</div>
     <ul class="menu">
-      <li>일일 스크럼</li>
-      <li>프로젝트 보드</li>
-      <li>월별 로깅</li>
-      <li>기간별 블록</li>
+      <li data-target="scrum">일일 스크럼</li>
+      <li data-target="board">프로젝트 보드</li>
+      <li data-target="monthly">월별 로깅</li>
+      <li data-target="period">기간별 블록</li>
     </ul>
   </aside>
 
-  <!-- 우측 메인 영역: 현재는 비어 있음 -->
-  <main class="main"></main>
+  <!-- 우측 메인 영역: 4개 페이지 패널, 활성화된 것만 표시 -->
+  <main class="main">
+    <div class="page" data-page="scrum"><h1>일일 스크럼</h1></div>
+    <div class="page" data-page="board"><h1>프로젝트 보드</h1></div>
+    <div class="page" data-page="monthly"><h1>월별 로깅</h1></div>
+    <div class="page" data-page="period"><h1>기간별 블록</h1></div>
+  </main>
 
 <script>
-  // 메뉴 클릭 시 콘솔에 선택된 항목 출력 (추후 라우팅 연결 예정)
-  document.querySelectorAll('.menu li').forEach(function(item) {
+  // 메뉴 항목과 페이지 패널 캐싱
+  var menuItems = document.querySelectorAll('.menu li');
+  var pages = document.querySelectorAll('.page');
+
+  // 특정 타겟 키로 메뉴/페이지를 활성화하는 함수
+  function activate(target) {
+    menuItems.forEach(function(item) {
+      item.classList.toggle('active', item.dataset.target === target);
+    });
+    pages.forEach(function(page) {
+      page.classList.toggle('active', page.dataset.page === target);
+    });
+  }
+
+  // 메뉴 클릭 시 해당 페이지로 전환
+  menuItems.forEach(function(item) {
     item.addEventListener('click', function() {
-      console.log('선택된 메뉴:', item.textContent);
+      activate(item.dataset.target);
     });
   });
+
+  // Cmd(Mac)/Ctrl(Win) + 1~4 키보드 단축키로 전환
+  document.addEventListener('keydown', function(e) {
+    // 조합 키가 눌리지 않았으면 무시
+    if (!(e.metaKey || e.ctrlKey)) return;
+    // Shift/Alt가 함께 눌리면 브라우저 단축키와 충돌 가능하므로 제외
+    if (e.shiftKey || e.altKey) return;
+
+    var index = parseInt(e.key, 10);
+    if (index >= 1 && index <= menuItems.length) {
+      // 브라우저 기본 동작(탭 전환 등) 방지
+      e.preventDefault();
+      activate(menuItems[index - 1].dataset.target);
+    }
+  });
+
+  // 초기 진입 시 첫 번째 메뉴를 기본 선택
+  activate(menuItems[0].dataset.target);
 </script>
 </body>
 </html>
