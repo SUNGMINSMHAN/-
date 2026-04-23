@@ -269,6 +269,196 @@
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
   }
 
+  /* ── 오늘 할 일 백로그 리스트 ── */
+
+  /* 입력창 + 프로젝트 드롭다운 + 추가 버튼 한 줄 */
+  .task-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .task-input-row input[type="text"] {
+    flex: 1;
+    padding: 9px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    color: inherit;
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+  }
+
+  .task-input-row input[type="text"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
+  }
+
+  .task-input-row select {
+    padding: 9px 10px;
+    font-family: inherit;
+    font-size: 13px;
+    color: inherit;
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    min-width: 140px;
+  }
+
+  .task-input-row .primary-btn {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+
+  /* 리스트 공통 */
+  .task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  /* 항목 */
+  .task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background-color: #ffffff;
+    border: 1px solid #e4e7eb;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+  }
+
+  /* 3일 이상 묵은 미완료 항목: 은은한 붉은 톤 */
+  .task-item.stale {
+    background-color: #fff5f5;
+    border-color: #fecaca;
+  }
+
+  .task-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .task-item-project-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .task-item-text {
+    flex: 1;
+    font-size: 14px;
+    color: inherit;
+    word-break: break-word;
+  }
+
+  .task-item-date {
+    font-size: 12px;
+    color: #8a94a4;
+    white-space: nowrap;
+  }
+
+  /* 며칠 째 묵은 항목: 붉은 강조 */
+  .task-item-date.aged {
+    color: #dc2626;
+    font-weight: 600;
+  }
+
+  /* 삭제 버튼 (X) */
+  .task-item-delete {
+    width: 26px;
+    height: 26px;
+    font-size: 18px;
+    line-height: 1;
+    color: #b0b5bd;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .task-item-delete:hover {
+    color: #dc2626;
+    background-color: rgba(220, 38, 38, 0.08);
+  }
+
+  /* 완료 항목: 회색 + 취소선 */
+  .task-item.done .task-item-text {
+    color: #9aa4b2;
+    text-decoration: line-through;
+  }
+
+  .task-item.done {
+    opacity: 0.75;
+  }
+
+  /* 완료 항목 접기/펴기 토글 */
+  .task-toggle-completed {
+    display: block;
+    padding: 6px 0;
+    margin: 4px 0 8px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #667085;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .task-toggle-completed:hover {
+    color: #3498db;
+  }
+
+  /* 빈 상태 안내 */
+  .task-empty {
+    padding: 16px;
+    color: #8a94a4;
+    font-size: 13px;
+    text-align: center;
+    border: 1px dashed #d0d7de;
+    border-radius: 6px;
+    list-style: none;
+  }
+
+  /* ── 다크모드 ── */
+  body.dark .task-input-row input[type="text"],
+  body.dark .task-input-row select {
+    background-color: #2a2f38;
+    border-color: #3d4451;
+    color: #e0e0e0;
+  }
+
+  body.dark .task-item {
+    background-color: #262a33;
+    border-color: #3d4451;
+  }
+
+  body.dark .task-item.stale {
+    background-color: #3a2626;
+    border-color: #6a3434;
+  }
+
+  body.dark .task-item-date.aged {
+    color: #f87171;
+  }
+
+  body.dark .task-item-delete:hover {
+    background-color: rgba(248, 113, 113, 0.15);
+  }
+
+  body.dark .task-empty {
+    color: #9aa4b2;
+    border-color: #3d4451;
+  }
+
   /* ── 프로젝트 보드 ── */
 
   /* 상단 툴바: 새 프로젝트 버튼을 우측에 배치 */
@@ -635,9 +825,18 @@
         <label for="scrum-yesterday">어제 한 일</label>
         <textarea id="scrum-yesterday" class="scrum-field" placeholder="어제 완료한 일을 적어주세요"></textarea>
       </div>
-      <div class="scrum-field-group">
-        <label for="scrum-today">오늘 할 일</label>
-        <textarea id="scrum-today" class="scrum-field" placeholder="오늘 진행할 일을 적어주세요"></textarea>
+      <div class="scrum-field-group" id="task-section">
+        <label>오늘 할 일</label>
+        <div class="task-input-row">
+          <input type="text" id="task-input" placeholder="할 일을 입력하고 Enter 또는 추가 버튼">
+          <select id="task-project-select" aria-label="프로젝트 선택">
+            <option value="">(프로젝트 선택)</option>
+          </select>
+          <button type="button" class="primary-btn" id="task-add-btn">추가</button>
+        </div>
+        <ul class="task-list" id="task-list-active"></ul>
+        <button type="button" class="task-toggle-completed" id="task-toggle-completed" hidden></button>
+        <ul class="task-list task-list-completed" id="task-list-completed" hidden></ul>
       </div>
       <div class="scrum-field-group">
         <label for="scrum-blockers">블로커</label>
@@ -779,6 +978,10 @@
           });
           // 설정이 바뀌었을 수 있으므로 테마 재적용
           applyDarkMode();
+          // 스크럼/프로젝트도 새 데이터 반영 (함수가 이미 정의된 뒤면 호출)
+          if (typeof migrateScrumSchema === 'function') migrateScrumSchema();
+          if (typeof renderProjects     === 'function') renderProjects();
+          if (typeof loadSelectedScrum  === 'function') loadSelectedScrum();
           alert('백업을 불러왔습니다.');
         } catch (err) {
           alert('올바른 JSON 파일이 아닙니다.');
@@ -902,10 +1105,9 @@
         && a.getDate()     === b.getDate();
   }
 
-  // 스크럼 폼/네비게이션 요소 캐싱
+  // 스크럼 폼/네비게이션 요소 캐싱 (today는 이제 textarea가 아닌 백로그 리스트)
   var scrumFields = {
     yesterday: document.getElementById('scrum-yesterday'),
-    today:     document.getElementById('scrum-today'),
     blockers:  document.getElementById('scrum-blockers')
   };
   var scrumSavedEl  = document.getElementById('scrum-saved');
@@ -914,6 +1116,17 @@
   var weekDateInput = document.getElementById('week-date-input');
   var weekPrevBtn   = document.getElementById('week-prev');
   var weekNextBtn   = document.getElementById('week-next');
+
+  // 오늘 할 일 UI 요소
+  var taskInput            = document.getElementById('task-input');
+  var taskProjectSelect    = document.getElementById('task-project-select');
+  var taskAddBtn           = document.getElementById('task-add-btn');
+  var taskListActiveEl     = document.getElementById('task-list-active');
+  var taskListCompletedEl  = document.getElementById('task-list-completed');
+  var taskToggleCompleted  = document.getElementById('task-toggle-completed');
+
+  // 완료 섹션 펼침 여부 (세션 내 상태)
+  var completedExpanded = false;
 
   // 현재 선택된 날짜 (초기값: 오늘). 저장/로드의 기준 키
   var selectedDate = new Date();
@@ -960,26 +1173,321 @@
     }
   }
 
-  // 선택된 날짜의 저장본을 textarea에 채움
+  // 선택된 날짜의 저장본을 textarea에 채우고 태스크 리스트/드롭다운 갱신
   function loadSelectedScrum() {
     var scrums = getData('kr_scrums');
     var entry  = scrums[formatYMD(selectedDate)] || {};
     scrumFields.yesterday.value = entry.yesterday || '';
-    scrumFields.today.value     = entry.today     || '';
     scrumFields.blockers.value  = entry.blockers  || '';
+    refreshProjectDropdown();
+    renderTaskList();
   }
 
-  // 현재 폼 값을 선택된 날짜 키 아래에 저장
+  // yesterday/blockers만 저장. today 배열은 태스크 조작 함수에서 직접 관리
   function saveSelectedScrum() {
     var scrums = getData('kr_scrums');
-    scrums[formatYMD(selectedDate)] = {
+    var key = formatYMD(selectedDate);
+    var existing = scrums[key] || {};
+    scrums[key] = {
       yesterday: scrumFields.yesterday.value,
-      today:     scrumFields.today.value,
+      today:     Array.isArray(existing.today) ? existing.today : [],
       blockers:  scrumFields.blockers.value,
       updatedAt: new Date().toISOString()
     };
     setData('kr_scrums', scrums);
     flashSavedIndicator();
+  }
+
+  // ── 스키마 마이그레이션 ──
+  // 구버전은 today를 줄바꿈 텍스트로 저장했음. 객체 배열로 변환.
+  function migrateScrumSchema() {
+    var scrums = getData('kr_scrums');
+    var changed = false;
+    Object.keys(scrums).forEach(function(date) {
+      var entry = scrums[date];
+      if (!entry || typeof entry !== 'object') return;
+      if (typeof entry.today === 'string') {
+        var lines = entry.today.split('\n')
+          .map(function(s) { return s.trim(); })
+          .filter(function(s) { return s.length > 0; });
+        entry.today = lines.map(function(text, i) {
+          return {
+            id: 't_' + Date.now() + '_' + i + '_' + Math.random().toString(36).slice(2, 8),
+            text: text,
+            done: false,
+            createdDate: date,
+            completedDate: null,
+            projectId: null
+          };
+        });
+        changed = true;
+      } else if (entry.today == null) {
+        entry.today = [];
+        changed = true;
+      } else if (!Array.isArray(entry.today)) {
+        entry.today = [];
+        changed = true;
+      }
+    });
+    if (changed) setData('kr_scrums', scrums);
+  }
+
+  // ── 태스크 CRUD ──
+
+  // 고유 ID 생성
+  function newTaskId() {
+    return 't_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+  }
+
+  // 모든 날짜를 뒤져 id로 태스크 위치 반환 (없으면 null)
+  function findTask(scrums, id) {
+    var keys = Object.keys(scrums);
+    for (var i = 0; i < keys.length; i++) {
+      var arr = scrums[keys[i]] && scrums[keys[i]].today;
+      if (!Array.isArray(arr)) continue;
+      for (var j = 0; j < arr.length; j++) {
+        if (arr[j].id === id) return { date: keys[i], index: j };
+      }
+    }
+    return null;
+  }
+
+  // 선택된 날짜의 entry를 보장 (없으면 생성)
+  function ensureEntry(scrums, key) {
+    if (!scrums[key]) {
+      scrums[key] = { yesterday: '', today: [], blockers: '', updatedAt: null };
+    }
+    if (!Array.isArray(scrums[key].today)) {
+      scrums[key].today = [];
+    }
+    return scrums[key];
+  }
+
+  function addTask(text, projectId) {
+    var trimmed = (text || '').trim();
+    if (!trimmed) return;
+    var scrums = getData('kr_scrums');
+    var key = formatYMD(selectedDate);
+    var entry = ensureEntry(scrums, key);
+    entry.today.push({
+      id: newTaskId(),
+      text: trimmed,
+      done: false,
+      createdDate: key,
+      completedDate: null,
+      projectId: projectId || null
+    });
+    entry.updatedAt = new Date().toISOString();
+    setData('kr_scrums', scrums);
+    renderTaskList();
+    flashSavedIndicator();
+  }
+
+  function toggleTaskDone(id) {
+    var scrums = getData('kr_scrums');
+    var loc = findTask(scrums, id);
+    if (!loc) return;
+    var task = scrums[loc.date].today[loc.index];
+    if (task.done) {
+      task.done = false;
+      task.completedDate = null;
+    } else {
+      task.done = true;
+      task.completedDate = formatYMD(new Date());
+    }
+    setData('kr_scrums', scrums);
+    renderTaskList();
+    flashSavedIndicator();
+  }
+
+  function deleteTask(id) {
+    var scrums = getData('kr_scrums');
+    var loc = findTask(scrums, id);
+    if (!loc) return;
+    scrums[loc.date].today.splice(loc.index, 1);
+    setData('kr_scrums', scrums);
+    renderTaskList();
+    flashSavedIndicator();
+  }
+
+  // ── 태스크 렌더링 ──
+
+  // YMD 두 날짜 사이의 일수 차 (b - a)
+  function daysBetweenYMD(a, b) {
+    var d1 = parseYMD(a);
+    var d2 = parseYMD(b);
+    return Math.round((d2 - d1) / 86400000);
+  }
+
+  // 프로젝트 ID로 프로젝트 메타 조회 (없으면 null)
+  function findProjectById(projects, id) {
+    for (var i = 0; i < projects.length; i++) {
+      if (projects[i].id === id) return projects[i];
+    }
+    return null;
+  }
+
+  // 한 태스크를 <li> 로 렌더링
+  function createTaskItemEl(task, todayYMD, projects) {
+    var li = document.createElement('li');
+    li.className = 'task-item';
+    if (task.done) li.classList.add('done');
+
+    var ageDays = daysBetweenYMD(task.createdDate, todayYMD);
+    // 3일 이상 묵은 미완료 항목은 붉은 톤
+    if (!task.done && ageDays >= 3) li.classList.add('stale');
+
+    // 체크박스
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = !!task.done;
+    cb.addEventListener('change', function() { toggleTaskDone(task.id); });
+    li.appendChild(cb);
+
+    // 프로젝트 색상 점 (있을 때만)
+    if (task.projectId) {
+      var proj = findProjectById(projects, task.projectId);
+      if (proj) {
+        var dot = document.createElement('span');
+        dot.className = 'task-item-project-dot';
+        dot.style.backgroundColor = proj.color || '#3498db';
+        dot.title = proj.name;
+        li.appendChild(dot);
+      }
+    }
+
+    // 본문
+    var textEl = document.createElement('span');
+    textEl.className = 'task-item-text';
+    textEl.textContent = task.text;
+    li.appendChild(textEl);
+
+    // 날짜 표시
+    var dateEl = document.createElement('span');
+    dateEl.className = 'task-item-date';
+    if (task.done && task.completedDate) {
+      var cp = task.completedDate.split('-');
+      dateEl.textContent = '완료 ' + parseInt(cp[1], 10) + '/' + parseInt(cp[2], 10);
+    } else if (task.createdDate !== todayYMD) {
+      var cp2 = task.createdDate.split('-');
+      dateEl.textContent = '📌 ' + parseInt(cp2[1], 10) + '/' + parseInt(cp2[2], 10)
+                         + ' 작성 (' + (ageDays + 1) + '일째)';
+      dateEl.classList.add('aged');
+    }
+    li.appendChild(dateEl);
+
+    // 삭제 버튼
+    var del = document.createElement('button');
+    del.type = 'button';
+    del.className = 'task-item-delete';
+    del.setAttribute('aria-label', '삭제');
+    del.title = '삭제';
+    del.textContent = '×';
+    del.addEventListener('click', function(e) {
+      e.stopPropagation();
+      deleteTask(task.id);
+    });
+    li.appendChild(del);
+
+    return li;
+  }
+
+  // 선택 날짜에 따라 active/completed 리스트를 채움
+  function renderTaskList() {
+    var scrums   = getData('kr_scrums');
+    var projects = getData('kr_projects');
+    var selKey   = formatYMD(selectedDate);
+    var todayKey = formatYMD(new Date());
+    var isToday  = selKey === todayKey;
+
+    var active = [];
+    var completed = [];
+
+    if (isToday) {
+      // 오늘 뷰: 전체 미완료(가상 이월) + 오늘 완료된 항목
+      Object.keys(scrums).forEach(function(date) {
+        var arr = scrums[date] && scrums[date].today;
+        if (!Array.isArray(arr)) return;
+        arr.forEach(function(t) {
+          if (!t.done) active.push(t);
+          else if (t.completedDate === todayKey) completed.push(t);
+        });
+      });
+    } else {
+      // 과거/미래: 그날 작성된 항목만
+      Object.keys(scrums).forEach(function(date) {
+        var arr = scrums[date] && scrums[date].today;
+        if (!Array.isArray(arr)) return;
+        arr.forEach(function(t) {
+          if (t.createdDate !== selKey) return;
+          if (t.done) completed.push(t);
+          else        active.push(t);
+        });
+      });
+    }
+
+    // 오래된 것 먼저 (createdDate 오름차순). sort는 stable이라 같은 날짜는 push 순서 유지
+    active.sort(function(a, b) {
+      return a.createdDate < b.createdDate ? -1 : a.createdDate > b.createdDate ? 1 : 0;
+    });
+    completed.sort(function(a, b) {
+      var ac = a.completedDate || a.createdDate;
+      var bc = b.completedDate || b.createdDate;
+      return ac < bc ? -1 : ac > bc ? 1 : 0;
+    });
+
+    // active 렌더
+    taskListActiveEl.innerHTML = '';
+    if (active.length === 0) {
+      var empty = document.createElement('li');
+      empty.className = 'task-empty';
+      empty.textContent = isToday
+        ? '할 일이 없습니다. 위 입력창에서 추가해보세요.'
+        : '이 날에 작성된 할 일이 없습니다.';
+      taskListActiveEl.appendChild(empty);
+    } else {
+      active.forEach(function(t) {
+        taskListActiveEl.appendChild(createTaskItemEl(t, todayKey, projects));
+      });
+    }
+
+    // completed 토글 라벨/표시
+    if (completed.length === 0) {
+      taskToggleCompleted.hidden = true;
+      taskListCompletedEl.hidden = true;
+      taskListCompletedEl.innerHTML = '';
+    } else {
+      taskToggleCompleted.hidden = false;
+      taskToggleCompleted.textContent = '✓ 완료 항목 '
+        + (completedExpanded ? '숨기기' : '보기')
+        + ' (' + completed.length + '개)';
+      taskListCompletedEl.hidden = !completedExpanded;
+      taskListCompletedEl.innerHTML = '';
+      completed.forEach(function(t) {
+        taskListCompletedEl.appendChild(createTaskItemEl(t, todayKey, projects));
+      });
+    }
+  }
+
+  // 프로젝트 드롭다운을 kr_projects로부터 다시 채움 (선택값 보존)
+  function refreshProjectDropdown() {
+    var projects = getData('kr_projects');
+    var prev = taskProjectSelect.value;
+    taskProjectSelect.innerHTML = '';
+    var placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = '(프로젝트 선택)';
+    taskProjectSelect.appendChild(placeholder);
+    projects.forEach(function(p) {
+      var opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = p.name;
+      taskProjectSelect.appendChild(opt);
+    });
+    // 가능하면 기존 선택 유지
+    if (prev && projects.some(function(p) { return p.id === prev; })) {
+      taskProjectSelect.value = prev;
+    }
   }
 
   // 선택 날짜 변경: 날짜 라벨, input, 주 버튼, 폼을 모두 갱신
@@ -998,9 +1506,32 @@
     saveDebounceTimer = setTimeout(saveSelectedScrum, 300);
   }
 
-  // textarea 입력 바인딩
+  // 어제 한 일/블로커 textarea 입력 바인딩 (디바운스 저장)
   Object.keys(scrumFields).forEach(function(k) {
     scrumFields[k].addEventListener('input', scheduleSave);
+  });
+
+  // 태스크 추가: 버튼 클릭 또는 Enter
+  function submitNewTask() {
+    var val = taskInput.value;
+    var projectId = taskProjectSelect.value;
+    addTask(val, projectId);
+    taskInput.value = '';
+    taskProjectSelect.value = '';
+    taskInput.focus();
+  }
+  taskAddBtn.addEventListener('click', submitNewTask);
+  taskInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.isComposing) {
+      e.preventDefault();
+      submitNewTask();
+    }
+  });
+
+  // 완료 항목 보기/숨기기 토글
+  taskToggleCompleted.addEventListener('click', function() {
+    completedExpanded = !completedExpanded;
+    renderTaskList();
   });
 
   // 주 네비게이션: 선택 날짜를 7일 단위로 이동 (요일 유지)
@@ -1016,7 +1547,8 @@
     if (this.value) setSelectedDate(parseYMD(this.value));
   });
 
-  // 초기 상태: 오늘 날짜로 설정
+  // 초기 마이그레이션 + 오늘 날짜로 설정
+  migrateScrumSchema();
   setSelectedDate(selectedDate);
 
   // ─────────────────────────────────────────────────────────────
@@ -1133,6 +1665,9 @@
     setData('kr_projects', projects);
     closeProjectModal();
     renderProjects();
+    // 새 프로젝트가 스크럼 드롭다운에도 나타나도록 갱신 + 재렌더 (점 색상 반영)
+    refreshProjectDropdown();
+    renderTaskList();
   });
 
   // 초기 렌더
